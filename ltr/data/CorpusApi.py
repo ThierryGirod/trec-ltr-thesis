@@ -4,11 +4,16 @@ from typing import Dict, List
 from typing import Dict, List
 import csv
 import json
+from os import listdir
+from os.path import isfile, join
 
 from ltr.Judgment import Judgment
 from . import Config
 
 def getDevQueriesAsDict() -> Dict[int, str]:
+    """
+    Returns the downloaded developer queries as dict with the id as key and the query as value
+    """
     queries = {}
     with open(Config.DEV1_QUERIES_TSV, 'r') as tsv:
         tsvReader = csv.reader(tsv, delimiter='\t')
@@ -18,6 +23,9 @@ def getDevQueriesAsDict() -> Dict[int, str]:
     return queries
 
 def getDevQrels() -> List:
+    """
+    Returns the downloaded developer QRELS as list
+    """
     qrels = []
     with open(Config.DEV1_QRELS_TSV, 'r') as tsv:
         tsvReader = csv.reader(tsv, delimiter='\t')
@@ -27,13 +35,24 @@ def getDevQrels() -> List:
     return qrels
 
 # Function from https://microsoft.github.io/msmarco/TREC-Deep-Learning.html
-def getDocumentFromCorpus(document_id: str):
-    (string1, string2, bundlenum, position) = document_id.split('_')
+def getDocumentFromCorpus(documentId: str):
+    """
+    Returns a document from the corpus by a given id
+    """
+    (string1, string2, bundlenum, position) = documentId.split('_')
     assert string1 == 'msmarco' and string2 == 'doc'
 
-    with open(f'{Config.CORPUS_DIRECTORY}/msmarco_doc_{bundlenum}', 'rt', encoding='utf8') as in_fh:
-        in_fh.seek(int(position))
-        json_string = in_fh.readline()
-        document = json.loads(json_string)
-        assert document['docid'] == document_id
+    with open(f'{Config.CORPUS_DIRECTORY}/msmarco_doc_{bundlenum}', 'rt', encoding='utf8') as inFh:
+        inFh.seek(int(position))
+        jsonString = inFh.readline()
+        document = json.loads(jsonString)
+        assert document['docid'] == documentId
         return document
+
+def getCorpusFileByFile():
+    """
+    Returns a generator function that returns all the files from the corpus directory
+    """
+    files = [file for file in listdir(Config.CORPUS_DIRECTORY) if isfile(join(Config.CORPUS_DIRECTORY, file))]
+    for file in files:
+        yield join(Config.CORPUS_DIRECTORY, file)
