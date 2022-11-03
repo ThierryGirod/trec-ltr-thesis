@@ -56,3 +56,10 @@ def getCorpusFileByFile():
     files = [file for file in listdir(Config.CORPUS_DIRECTORY) if isfile(join(Config.CORPUS_DIRECTORY, file))]
     for file in files:
         yield join(Config.CORPUS_DIRECTORY, file)
+
+def saveListAsJson(path: str, list: List):
+    """
+    Saves a list of values as json
+    """
+    with open(path, 'w') as jsonFile:
+        json.dump(list, jsonFile, indent=4)
