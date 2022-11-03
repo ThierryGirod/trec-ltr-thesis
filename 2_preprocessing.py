@@ -19,6 +19,7 @@ def preprocess():
 
             # Load the documents
             lines = jsonFile.readlines()
+            print(f'File loaded: {fileName}')
 
             # Load the documents into list
             documents = []
