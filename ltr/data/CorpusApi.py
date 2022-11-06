@@ -55,11 +55,11 @@ def getCorpusFileByFile(processed: bool = False):
     """
     files = []
     if processed == True:
-        files = [file for file in listdir(Config.CORPUS_PROCESSED_DIRECTORY) if isfile(join(Config.CORPUS_PROCESSED_DIRECTORY, file))]
+        files = [join(Config.CORPUS_PROCESSED_DIRECTORY, file) for file in listdir(Config.CORPUS_PROCESSED_DIRECTORY) if isfile(join(Config.CORPUS_PROCESSED_DIRECTORY, file))]
     else:
-        files = [file for file in listdir(Config.CORPUS_DIRECTORY) if isfile(join(Config.CORPUS_DIRECTORY, file))]
+        files = [join(Config.CORPUS_DIRECTORY, file) for file in listdir(Config.CORPUS_DIRECTORY) if isfile(join(Config.CORPUS_DIRECTORY, file))]
     for file in files:
-        yield join(Config.CORPUS_DIRECTORY, file)
+        yield file
 
 def saveListAsJson(path: str, list: List):
     """
