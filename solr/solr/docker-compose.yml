@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  solr:
+    image: ltrps-solr
+    expose:
+      - "8983"
+    ports:
+      - "8983:8983"
+    environment:
+      SERVER_HOST: "0.0.0.0"
+    volumes:
+      - ltrps-solr-data:/usr/share/solr/data
+    deploy:
+      resources:
+        limits:
+          memory: "1g"
+volumes:
+  ltrps-solr-data:
+    driver: local

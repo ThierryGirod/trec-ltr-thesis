@@ -1,0 +1,11 @@
+FROM solr:9.0
+
+USER root
+
+ADD run_solr_w_ltr.sh ./run_solr_w_ltr.sh
+RUN chown solr:solr run_solr_w_ltr.sh
+RUN chmod u+x run_solr_w_ltr.sh
+
+USER solr
+
+ENTRYPOINT "./run_solr_w_ltr.sh" 

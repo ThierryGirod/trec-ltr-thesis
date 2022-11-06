@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  solr:
+    build:
+      context: solr/.
+      dockerfile: Dockerfile
+    container_name: ltrps-solr
+    hostname: ltrps-solr
+    ports:
+      - 8983:8983
+    environment:
+      - ZK_HOST=ltrps-zookeeper:2181
+      - SOLR_HOST=ltrps-solr
+    networks:
+      - ltrps-zk
+    depends_on:
+      - zookeeper
+
+  zookeeper:
+    image: zookeeper:3.5.5
+    container_name: ltrps-zookeeper
+    hostname: ltrps-zookeeper
+    ports:
+      - 2181:2128
+    networks:
+      - ltrps-zk
+
+networks:
+  ltrps-zk:
