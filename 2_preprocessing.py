@@ -30,6 +30,9 @@ def preprocess():
 
             # Preprocess the documents
             for i, document in enumerate(documents):
+                # rename docid field
+                document['id'] = document['docid']
+                del document['docid']
                 # replace linebreaks with whitespaces
                 document['title'] = re.sub('\n', ' ', document['title'])
                 document['headings'] = re.sub('\n', ' ', document['headings'])
