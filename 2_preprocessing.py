@@ -1,6 +1,7 @@
 from ltr.data import CorpusApi, Config
 import json
 import re
+import os
 
 
 def preprocess():
@@ -53,6 +54,11 @@ def preprocess():
                 print(f'{fileName}:{i+1}/{len(documents)} processed')
             
             CorpusApi.saveListAsJson(f'{Config.CORPUS_ROOT_DIRECTORY}/processed/{fileName}_processed.json', documents)
+            if(os.path.isfile(file)):
+                #os.remove() function to remove the file
+                os.remove(file)
+                #Printing the confirmation message of deletion
+                print(f'File {fileName}Deleted successfully')
             print(f'End processing {fileName}')
         
 
