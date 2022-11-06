@@ -49,11 +49,15 @@ def getDocumentFromCorpus(documentId: str):
         assert document['docid'] == documentId
         return document
 
-def getCorpusFileByFile():
+def getCorpusFileByFile(processed: boolean = False):
     """
     Returns a generator function that returns all the files from the corpus directory
     """
-    files = [file for file in listdir(Config.CORPUS_DIRECTORY) if isfile(join(Config.CORPUS_DIRECTORY, file))]
+    files = []
+    if processed:
+        files = [file for file in listdir(Config.CORPUS_PROCESSED_DIRECTORY) if isfile(join(Config.CORPUS_PROCESSED_DIRECTORY, file))]
+    else:
+        files = [file for file in listdir(Config.CORPUS_DIRECTORY) if isfile(join(Config.CORPUS_DIRECTORY, file))]
     for file in files:
         yield join(Config.CORPUS_DIRECTORY, file)
 
