@@ -49,7 +49,7 @@ def getDocumentFromCorpus(documentId: str):
         assert document['docid'] == documentId
         return document
 
-def getCorpusFileByFile(processed: boolean = False):
+def getCorpusFileByFile(processed: bool = False):
     """
     Returns a generator function that returns all the files from the corpus directory
     """
