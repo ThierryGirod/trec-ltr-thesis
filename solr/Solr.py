@@ -79,3 +79,12 @@ def createTextField(collectionName: str, fieldName: str):
 def deleteField(collectionName: str, fieldName: str):
     deleteField = {"delete-field":{ "name":fieldName }}
     response = requests.post(f"{solrUrl}{collectionName}/schema", json=deleteField).json()
+    
+def indexFile(collectionName: str, path: str):
+    solrIndexApi = f'{solrUrl}{collectionName}/update?commit=true'
+    with open(path, 'r') as jsonFile:
+        print(f'{path} loading')
+        headers = {"Content-Type": "application/json"}
+        response = requests.post(solrIndexApi, data=jsonFile, headers=headers)
+        print(f'data send')
+        print(response.json())
