@@ -1,6 +1,8 @@
 version: "3.9"
 services:
   solr:
+    mem_limit: 16G
+    mem_reservation: 8G
     build:
       context: solr/.
       dockerfile: Dockerfile
@@ -11,12 +13,15 @@ services:
     environment:
       - ZK_HOST=ltrps-zookeeper:2181
       - SOLR_HOST=ltrps-solr
+      - SOLR_HEAP=10G
     networks:
       - ltrps-zk
     depends_on:
       - zookeeper
 
   zookeeper:
+    mem_limit: 2G
+    mem_reservation: 1G
     image: zookeeper:3.5.5
     container_name: ltrps-zookeeper
     hostname: ltrps-zookeeper
