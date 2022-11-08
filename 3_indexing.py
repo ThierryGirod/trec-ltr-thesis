@@ -7,7 +7,7 @@ collectionName = 'thesis-ltr'
 Solr.createCollection(collectionName)
 Solr.enableLtr(collectionName)
 
-Solr.createTextField(collectionName, 'id')
+#Solr.createTextField(collectionName, 'docid')
 Solr.createTextField(collectionName, 'url')
 Solr.createTextField(collectionName, 'title')
 Solr.createTextField(collectionName, 'headings')
