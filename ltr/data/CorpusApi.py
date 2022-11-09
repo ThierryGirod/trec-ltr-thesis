@@ -22,12 +22,36 @@ def getDevQueriesAsDict() -> Dict[int, str]:
     
     return queries
 
+def getTrainQueriesAsDict() -> Dict[int, str]:
+    """
+    Returns the downloaded train queries as dict with the id as key and the query as value
+    """
+    queries = {}
+    with open(Config.TRAIN_QUERIES_TSV, 'r') as tsv:
+        tsvReader = csv.reader(tsv, delimiter='\t')
+        for line in tsvReader:
+            queries[line[0]] = line[1]
+    
+    return queries
+
 def getDevQrels() -> List:
     """
     Returns the downloaded developer QRELS as list
     """
     qrels = []
     with open(Config.DEV1_QRELS_TSV, 'r') as tsv:
+        tsvReader = csv.reader(tsv, delimiter='\t')
+        for line in tsvReader:
+            qrels.append(Judgment(line[0],line[1],line[2],line[3]))
+    
+    return qrels
+
+def getTrainQrels() -> List:
+    """
+    Returns the downloaded developer QRELS as list
+    """
+    qrels = []
+    with open(Config.TRAIN_QRELS_TSV, 'r') as tsv:
         tsvReader = csv.reader(tsv, delimiter='\t')
         for line in tsvReader:
             qrels.append(Judgment(line[0],line[1],line[2],line[3]))
