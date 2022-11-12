@@ -14,6 +14,7 @@ def indexing():
     Solr.createTextField(collectionName, 'title')
     Solr.createTextField(collectionName, 'headings')
     Solr.createTextField(collectionName, 'body')
+    Solr.addCopyField(collectionName, '*', '_text_')
 
     for file in CorpusApi.getCorpusFileByFile(processed = True):    
         Solr.indexFile(collectionName, file)
