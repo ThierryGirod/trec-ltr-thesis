@@ -75,16 +75,19 @@ def createTextField(collectionName: str, fieldName: str):
     
     addField = {"add-field":{ "name":fieldName, "type":"text_general", "stored":"true", "indexed":"true", "multiValued":"false" }}
     response = requests.post(f"{solrUrl}{collectionName}/schema", json=addField).json()
+    print(f'Added {fieldName}')
 
 def deleteField(collectionName: str, fieldName: str):
     deleteField = {"delete-field":{ "name":fieldName }}
     response = requests.post(f"{solrUrl}{collectionName}/schema", json=deleteField).json()
+    print(f'Deleted {fieldName}')
 
 def addCopyField(collectionName: str, srcField: str, destField: str):
     rule = {"source": srcField, "dest": destField}
     copyField = {"add-copy-field": rule}
 
     response = requests.post(f"{solrUrl}{collectionName}/schema", json=copyField).json()
+    print(f'Added {srcField}/{destField}')
     
 def indexFile(collectionName: str, path: str):
     solrIndexApi = f'{solrUrl}{collectionName}/update?commit=true'

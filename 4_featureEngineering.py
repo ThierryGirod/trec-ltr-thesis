@@ -37,7 +37,15 @@ featureSet = [
       "params" : {
         "q" : "body:(${keywords})"
       }
-    }
+    }, 
+    {
+      "name" : "document_bm25",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "_text_:(${keywords})"
+      }
+    },
 ]
 
 response = requests.put(f'{Solr.solrUrl}{collectionName}/schema/feature-store',
