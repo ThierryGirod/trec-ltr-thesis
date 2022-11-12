@@ -44,25 +44,4 @@ response = requests.put(f'{Solr.solrUrl}{collectionName}/schema/feature-store',
                     json=featureSet)
 
 
-
-for i, judgment in enumerate(judgments):
-    print(f'Start {i + 1}')
-    judgment.query = re.sub('[^\w\s]', '', judgment.query)
-    featureLoggingQuery = {
-        "fl": f"id,title,[features store=thesis-ltr efi.keywords=\"{judgment.query}\"]",
-        'q': f"id:{judgment.docId}",
-        'rows': 10,
-        'wt': 'json'  
-    }
-    
-    print(featureLoggingQuery)
-
-    response = requests.post(f'{Solr.solrUrl}{collectionName}/select', data=featureLoggingQuery)
-
-
-    print(response.json())
-    #features = response.json()['response']['docs'][0]['[features]']
-    #judgment.features = [float(feature.split('=')[1]) for feature in features.split(',')]
-    print(f'Processed {i + 1}/{len(judgments)}')
-
-print(judgments)
+print(response)
