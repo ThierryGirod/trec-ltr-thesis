@@ -49,9 +49,5 @@ def preprocess():
         print(f'Batch #{i} processed')
         del batch
         
-    
-    
-    
-
 if __name__ == '__main__':
     preprocess()
