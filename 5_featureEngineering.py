@@ -45,4 +45,4 @@ for doc in response.json()['response']['docs']:
     features = features.split(',')
     features = [float(ftr.split('=')[1]) for ftr in features]
 
-    print(f"id:{doc['id']} [{features}]")
+    print(f"id:{doc['id']} {features}")
