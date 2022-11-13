@@ -68,12 +68,45 @@ def enableLtr(collectionName: str):
     response = requests.post(collectionConfigUrl, json=addLtrTransformer).json()
     print(response)
     
+def createTextType(collectionName: str, typeName: str):
+    addTextType = {"add-field-type":{
+        "name":typeName,
+        "class":"solr.TextField",
+        "positionIncrementGap":"100",
+        "multiValued": "true",
+        "indexAnalyzer":{
+          "tokenizer":{
+            "class":"solr.StandardTokenizerFactory"},
+          "filters":[{
+              "class":"solr.ManagedStopFilterFactory",
+              "managed":"english",
+              },
+            {
+              "class":"solr.LowerCaseFilterFactory"}]},
+        "queryAnalyzer":{
+          "tokenizer":{
+            "class":"solr.StandardTokenizerFactory"},
+          "filters":[{
+              "class":"solr.ManagedStopFilterFactory",
+              "managed":"english",
+              },
+            {
+              "class":"solr.ManagedSynonymGraphFilterFactory",
+              "managed":"english"},
+            {
+              "class":"solr.LowerCaseFilterFactory"}]}},
+      
+    }
+    response = requests.post(f"{solrUrl}{collectionName}/schema", json=addTextType).json()
+    print(f'Added {typeName}')
     
-def createTextField(collectionName: str, fieldName: str):
+    
+    
+def createTextField(collectionName: str, fieldName: str, typeName: str):
     # Delete first existing field
     deleteField(collectionName, fieldName)
     
-    addField = {"add-field":{ "name":fieldName, "type":"text_general", "stored":"true", "indexed":"true", "multiValued":"false" }}
+    addField = {"add-field":{ "name":fieldName, "type": typeName, "stored":"true", "indexed":"true", "multiValued":"false" }}
     response = requests.post(f"{solrUrl}{collectionName}/schema", json=addField).json()
     print(f'Added {fieldName}')
 

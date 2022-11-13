@@ -12,10 +12,12 @@ def indexing():
     # Todo: Managed Stopwords and synonyms filter einbauen
 
     #Solr.createTextField(collectionName, 'docid')
-    Solr.createTextField(collectionName, 'url')
-    Solr.createTextField(collectionName, 'title')
-    Solr.createTextField(collectionName, 'headings')
-    Solr.createTextField(collectionName, 'body')
+    typeName = 'custom_text_general'
+    Solr.createTextType(collectionName, typeName)
+    Solr.createTextField(collectionName, 'url', typeName)
+    Solr.createTextField(collectionName, 'title', typeName)
+    Solr.createTextField(collectionName, 'headings', typeName)
+    Solr.createTextField(collectionName, 'body', typeName)
     Solr.addCopyField(collectionName, '*', '_text_')
 
     for file in CorpusApi.getCorpusFileByFile(processed = True):    
