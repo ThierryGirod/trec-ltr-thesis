@@ -80,6 +80,39 @@ featureSet = [
         "q" : "{!func} div(sum(${dcqt_values}),${query_terms_length})"
       }
     },
+    # Sum of inverse document frequency values
+    {
+      "name" : "title_idf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${tidf_values})"
+      }
+    },
+    {
+      "name" : "headings_idf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${hidf_values})"
+      }
+    },
+    {
+      "name" : "body_idf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${bidf_values})"
+      }
+    },
+    {
+      "name" : "document_idf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${didf_values})"
+      }
+    },
     # BM 25 Scores
     {
       "name" : "title_bm25",

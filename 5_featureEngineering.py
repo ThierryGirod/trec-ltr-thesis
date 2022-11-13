@@ -29,6 +29,26 @@ solrQuery = {
                                 if(termfreq(_text_,'california'),1,0)
             \"
             efi.query_terms_length=4
+            efi.tidf_values=\"  idf(title,'where'),
+                                idf(title,'is'),
+                                idf(title,'westminster'),
+                                idf(title,'california')
+            \" 
+            efi.hidf_values=\"  idf(headings,'where'),
+                                idf(headings,'is'),
+                                idf(headings,'westminster'),
+                                idf(headings,'california')
+            \" 
+            efi.bidf_values=\"  idf(body,'where'),
+                                idf(body,'is'),
+                                idf(body,'westminster'),
+                                idf(body,'california')
+            \" 
+            efi.didf_values=\"  idf(_text_,'where'),
+                                idf(_text_,'is'),
+                                idf(_text_,'westminster'),
+                                idf(_text_,'california')
+            \" 
     ]""",
     'q': "id:msmarco_doc_05_72507775 OR id:msmarco_doc_19_673141443 OR id:msmarco_doc_19_673231526 OR id:msmarco_doc_10_1691063043",
     'rows': 10,
