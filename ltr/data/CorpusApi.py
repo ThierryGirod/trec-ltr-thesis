@@ -6,6 +6,7 @@ import csv
 import json
 from os import listdir
 from os.path import isfile, join
+import os
 
 from ltr.Judgment import Judgment
 from . import Config
@@ -91,3 +92,10 @@ def saveListAsJson(path: str, list: List):
     """
     with open(path, 'w') as jsonFile:
         json.dump(list, jsonFile, indent=4)
+
+def deleteFile(path: str):
+    if(os.path.isfile(path)):
+        #os.remove() function to remove the file
+        os.remove(path)
+        #Printing the confirmation message of deletion
+        print(f'{path} deleted successfully')

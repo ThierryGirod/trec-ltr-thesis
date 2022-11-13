@@ -18,6 +18,7 @@ def indexing():
 
     for file in CorpusApi.getCorpusFileByFile(processed = True):    
         Solr.indexFile(collectionName, file)
+        CorpusApi.deleteFile(file)
         
 if __name__ == '__main__':
     indexing()
