@@ -1,0 +1,1 @@
+/opt/solr/bin/solr start -cloud -p 8983 -s "/opt/solr/example/cloud/node1/solr" -m 8G
