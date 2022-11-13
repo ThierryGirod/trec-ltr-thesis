@@ -8,6 +8,8 @@ def indexing():
     collectionName = 'thesis-ltr'
     Solr.createCollection(collectionName)
     Solr.enableLtr(collectionName)
+    
+    # Todo: Managed Stopwords and synonyms filter einbauen
 
     #Solr.createTextField(collectionName, 'docid')
     Solr.createTextField(collectionName, 'url')
