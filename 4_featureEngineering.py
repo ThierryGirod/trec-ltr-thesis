@@ -3,12 +3,6 @@ from solr import Solr
 import requests
 import json
 import re
-
-queries = CorpusApi.getDevQueriesAsDict()
-judgments = CorpusApi.getDevQrels()
-
-for judgment in judgments:
-    judgment.query = queries[judgment.query]
     
 collectionName = 'thesis-ltr'
 requests.delete(f'{Solr.solrUrl}{collectionName}/schema/feature-store/{collectionName}')
