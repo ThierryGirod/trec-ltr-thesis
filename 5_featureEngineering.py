@@ -57,6 +57,7 @@ solrQuery = {
 
 response = requests.post(f'{Solr.solrUrl}{collectionName}/select', data=solrQuery)
 
+print(response.json())
 
 for doc in response.json()['response']['docs']:
     # Parse '[features] array', ie
