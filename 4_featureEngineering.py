@@ -5,7 +5,9 @@ import json
 import re
     
 collectionName = 'thesis-ltr'
-requests.delete(f'{Solr.solrUrl}{collectionName}/schema/feature-store/{collectionName}')
+response = requests.delete(f'{Solr.solrUrl}{collectionName}/schema/feature-store/{collectionName}')
+
+print(response)
 
 featureSet = [
     # Covered query terms
@@ -143,7 +145,7 @@ featureSet = [
 ]
 
 response = requests.put(f'{Solr.solrUrl}{collectionName}/schema/feature-store',
-                    json=featureSet)
+                    json=featureSet).json()
 
 
-print(response.json())
+print(response)
