@@ -49,7 +49,7 @@ def enableLtr(collectionName: str):
     }
 
     print(f"Del/Adding LTR QParser for {collectionName} collection")
-    response = requests.post(collectionConfigUrl, json=deleteLtrQueryParser)
+    response = requests.post(collectionConfigUrl, json=deleteLtrQueryParser).json()
     print(response)
     
     response = requests.post(collectionConfigUrl, json=addLtrQueryParser).json()
