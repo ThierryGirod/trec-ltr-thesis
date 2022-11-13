@@ -28,6 +28,7 @@ solrQuery = {
                                 if(termfreq(_text_,'westminster'),1,0),
                                 if(termfreq(_text_,'california'),1,0)
             \"
+            efi.query_terms_length=4
     ]""",
     'q': "id:msmarco_doc_05_72507775 OR id:msmarco_doc_19_673141443 OR id:msmarco_doc_19_673231526 OR id:msmarco_doc_10_1691063043",
     'rows': 10,

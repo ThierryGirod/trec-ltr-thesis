@@ -14,6 +14,7 @@ collectionName = 'thesis-ltr'
 requests.delete(f'{Solr.solrUrl}{collectionName}/schema/feature-store/{collectionName}')
 
 featureSet = [
+    # Covered query terms
     {
       "name" : "title_coveredQueryTerms",
       "store": "thesis-ltr",
@@ -46,6 +47,40 @@ featureSet = [
         "q" : "{!func} sum(${dcqt_values})"
       }
     },
+    # Covered query terms ratio
+    {
+      "name" : "title_coveredQueryTermsRatio",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} div(sum(${tcqt_values}),${query_terms_length})"
+      }
+    },
+    {
+      "name" : "headings_coveredQueryTermsRatio",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} div(sum(${hcqt_values}),${query_terms_length})"
+      }
+    },
+    {
+      "name" : "body_coveredQueryTermsRatio",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} div(sum(${bcqt_values}),${query_terms_length})"
+      }
+    },
+    {
+      "name" : "document_coveredQueryTermsRatio",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} div(sum(${dcqt_values}),${query_terms_length})"
+      }
+    },
+    # BM 25 Scores
     {
       "name" : "title_bm25",
       "store": "thesis-ltr",
