@@ -84,4 +84,4 @@ response = requests.put(f'{Solr.solrUrl}{collectionName}/schema/feature-store',
                     json=featureSet)
 
 
-print(response)
+print(response.json())
