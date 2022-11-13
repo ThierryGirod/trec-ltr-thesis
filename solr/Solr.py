@@ -26,7 +26,8 @@ def createCollection(collectionName: str):
         ('action', "create"),
         ('name', collectionName),
         ('numShards', 1),
-        ('replicationFactor', 1) ]
+        ('replicationFactor', 1),
+        ('collection.configName','thesis-ltr')]
 
     print(createCollectionParams)
 
