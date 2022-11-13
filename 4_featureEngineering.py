@@ -15,6 +15,38 @@ requests.delete(f'{Solr.solrUrl}{collectionName}/schema/feature-store/{collectio
 
 featureSet = [
     {
+      "name" : "title_coveredQueryTerms",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${tcqt_values})"
+      }
+    },
+    {
+      "name" : "headings_coveredQueryTerms",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${hcqt_values})"
+      }
+    },
+    {
+      "name" : "body_coveredQueryTerms",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${bcqt_values})"
+      }
+    },
+    {
+      "name" : "document_coveredQueryTerms",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${dcqt_values})"
+      }
+    },
+    {
       "name" : "title_bm25",
       "store": "thesis-ltr",
       "class" : "org.apache.solr.ltr.feature.SolrFeature",
