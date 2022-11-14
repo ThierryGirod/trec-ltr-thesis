@@ -49,11 +49,12 @@ def enableLtr(collectionName: str):
     }
 
     print(f"Del/Adding LTR QParser for {collectionName} collection")
+    print("------------")
     response = requests.post(collectionConfigUrl, json=deleteLtrQueryParser).json()
-    print(response)
-    
+    print("Status: Success" if response["responseHeader"]["status"] == 0 else "Status: Failure; Response:[ " + str(response) + " ]" )
+    print("------------")
     response = requests.post(collectionConfigUrl, json=addLtrQueryParser).json()
-    print(response)
+    print("Status: Success" if response["responseHeader"]["status"] == 0 else "Status: Failure; Response:[ " + str(response) + " ]" )
     
     deleteLtrTransformer = { "delete-transformer": "features" }
     addLtrTransformer =  {
@@ -64,10 +65,12 @@ def enableLtr(collectionName: str):
     }}
 
     print(f"Adding LTR Doc Transformer for {collectionName} collection")
+    print("------------")
     response = requests.post(collectionConfigUrl, json=deleteLtrTransformer).json()
-    print(response)
+    print("Status: Success" if response["responseHeader"]["status"] == 0 else "Status: Failure; Response:[ " + str(response) + " ]" )
+    print("------------")
     response = requests.post(collectionConfigUrl, json=addLtrTransformer).json()
-    print(response)
+    print("Status: Success" if response["responseHeader"]["status"] == 0 else "Status: Failure; Response:[ " + str(response) + " ]" )
     
 def createTextType(collectionName: str, typeName: str):
     addTextType = {"add-field-type":{
