@@ -1,4 +1,5 @@
 import requests
+import json
 
 LTRPS_SOLR_HOST = 'localhost'
 LTRPS_SOLR_PORT = '8983'
@@ -134,3 +135,9 @@ def indexFile(collectionName: str, path: str):
         response = requests.post(solrIndexApi, data=jsonFile, headers=headers)
         print(f'data send')
         print(response.json())
+        
+def addStopWords(collectionName: str, stopWords: list, lang: str):
+  solrStopWordsApi = f'{solrUrl}{collectionName}/schema/analysis/stopwords/{lang}'
+  response = requests.put(solrStopWordsApi, json=stopWords).json()
+  print(response)
+  
