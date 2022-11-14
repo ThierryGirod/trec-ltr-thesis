@@ -29,6 +29,26 @@ solrQuery = {
                                 if(termfreq(_text_,'california'),1,0)
             \"
             efi.query_terms_length=4
+            efi.ttf_values=\"  tf(title,'where'),
+                                tf(title,'is'),
+                                tf(title,'westminster'),
+                                tf(title,'california')
+            \" 
+            efi.htf_values=\"  tf(headings,'where'),
+                                tf(headings,'is'),
+                                tf(headings,'westminster'),
+                                tf(headings,'california')
+            \" 
+            efi.btf_values=\"  tf(body,'where'),
+                                tf(body,'is'),
+                                tf(body,'westminster'),
+                                tf(body,'california')
+            \" 
+            efi.dtf_values=\"  tf(_text_,'where'),
+                                tf(_text_,'is'),
+                                tf(_text_,'westminster'),
+                                tf(_text_,'california')
+            \" 
             efi.tidf_values=\"  idf(title,'where'),
                                 idf(title,'is'),
                                 idf(title,'westminster'),
@@ -50,15 +70,15 @@ solrQuery = {
                                 idf(_text_,'california')
             \" 
     ]""",
-    'q': "id:msmarco_doc_05_72507775 OR id:msmarco_doc_19_673141443 OR id:msmarco_doc_19_673231526 OR id:msmarco_doc_10_1691063043",
+    'q': "id:1234",
     'rows': 10,
     'wt': 'json'  
 }
 
-response = requests.post(f'{Solr.solrUrl}{collectionName}/select', data=solrQuery)
+response = requests.post(f'{Solr.solrUrl}{collectionName}/select', data=solrQuery).json()
+print(response)
 
-
-for doc in response.json()['response']['docs']:
+for doc in response['response']['docs']:
     # Parse '[features] array', ie
     # title_bm25=0.0,overview_bm25=13.237938,vote_average=7.0'
     features = doc['[features]']

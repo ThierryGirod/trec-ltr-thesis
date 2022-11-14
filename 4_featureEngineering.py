@@ -76,6 +76,39 @@ featureSet = [
         "q" : "{!func} div(sum(${dcqt_values}),${query_terms_length})"
       }
     },
+    # Sum of term frequency values
+    {
+      "name" : "title_tf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${ttf_values})"
+      }
+    },
+    {
+      "name" : "headings_tf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${htf_values})"
+      }
+    },
+    {
+      "name" : "body_tf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${btf_values})"
+      }
+    },
+    {
+      "name" : "document_tf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${dtf_values})"
+      }
+    },
     # Sum of inverse document frequency values
     {
       "name" : "title_idf",
