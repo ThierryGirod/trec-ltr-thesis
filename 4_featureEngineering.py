@@ -142,6 +142,39 @@ featureSet = [
         "q" : "{!func} sum(${didf_values})"
       }
     },
+    # Sum of tf * idf values
+    {
+      "name" : "title_tfidf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${ttfidf_values})"
+      }
+    },
+    {
+      "name" : "headings_tfidf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${htfidf_values})"
+      }
+    },
+    {
+      "name" : "body_tfidf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${btfidf_values})"
+      }
+    },
+    {
+      "name" : "document_tfidf",
+      "store": "thesis-ltr",
+      "class" : "org.apache.solr.ltr.feature.SolrFeature",
+      "params" : {
+        "q" : "{!func} sum(${dtfidf_values})"
+      }
+    },
     # BM 25 Scores
     {
       "name" : "title_bm25",

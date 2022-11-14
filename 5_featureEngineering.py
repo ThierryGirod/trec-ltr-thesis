@@ -69,6 +69,26 @@ solrQuery = {
                                 idf(_text_,'westminster'),
                                 idf(_text_,'california')
             \" 
+            efi.ttfidf_values=\"  product(tf(title,'where'),idf(title,'where')),
+                                product(tf(title,'is'),idf(title,'is')),
+                                product(tf(title,'westminster'),idf(title,'westminster')),
+                                product(tf(title,'california'),idf(title,'california'))
+            \" 
+            efi.htfidf_values=\"  product(tf(headings,'where'),idf(headings,'where')),
+                                product(tf(headings,'is'),idf(headings,'is')),
+                                product(tf(headings,'westminster'),idf(headings,'westminster')),
+                                product(tf(headings,'california'),idf(headings,'california'))
+            \" 
+            efi.btfidf_values=\"  product(tf(body,'where'),idf(body,'where')),
+                                product(tf(body,'is'),idf(body,'is')),
+                                product(tf(body,'westminster'),idf(body,'westminster')),
+                                product(tf(body,'california'),idf(body,'california'))
+            \" 
+            efi.dtfidf_values=\"  product(tf(_text_,'where'),idf(_text_,'where')),
+                                product(tf(_text_,'is'),idf(_text_,'is')),
+                                product(tf(_text_,'westminster'),idf(_text_,'westminster')),
+                                product(tf(_text_,'california'),idf(_text_,'california'))
+            \" 
     ]""",
     'q': "id:1234",
     'rows': 10,
