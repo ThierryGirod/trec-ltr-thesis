@@ -90,7 +90,7 @@ solrQuery = {
                                 product(tf(_text_,'california'),idf(_text_,'california'))
             \" 
     ]""",
-    'q': "id:1234",
+    'q': "id:msmarco_doc_05_72507775 OR id:msmarco_doc_19_673141443 OR id:msmarco_doc_19_673231526 OR id:msmarco_doc_10_1691063043",
     'rows': 10,
     'wt': 'json'  
 }
