@@ -2,6 +2,7 @@ from solr import Solr
 from ltr.data import CorpusApi
 import json
 import requests
+import time
 
 def indexing():
 
@@ -20,9 +21,12 @@ def indexing():
     Solr.createTextField(collectionName, 'body', typeName)
     Solr.addCopyField(collectionName, '*', '_text_')
 
-    for file in CorpusApi.getCorpusFileByFile(processed = True):    
+    for file in CorpusApi.getCorpusFileByFile(processed = True):
+        start = time.time()    
         Solr.indexFile(collectionName, file)
         #CorpusApi.deleteFile(file)
+        end = time.time()
+        print('Time taken for indexing file:', end - start)
         
 if __name__ == '__main__':
     indexing()
