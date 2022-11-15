@@ -10,8 +10,6 @@ def indexing():
     Solr.createCollection(collectionName)
     Solr.enableLtr(collectionName)
     
-    # Todo: Managed Stopwords and synonyms filter einbauen
-
     #Solr.createTextField(collectionName, 'docid')
     typeName = 'custom_text_general'
     Solr.createTextType(collectionName, typeName)
