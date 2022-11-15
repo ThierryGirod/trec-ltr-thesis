@@ -141,3 +141,10 @@ def addStopWords(collectionName: str, stopWords: list, lang: str):
   response = requests.put(solrStopWordsApi, json=stopWords).json()
   print(response)
   
+def removeStopWords(collectionName: str, stopWords: list, lang: str):
+  solrStopWordsApi = f'{solrUrl}{collectionName}/schema/analysis/stopwords/{lang}'
+  for word in stopWords:
+    response = requests.delete(f'{solrStopWordsApi}/{word}').json()
+    print(response)
+    print(f'Deleted {word}')
+  
