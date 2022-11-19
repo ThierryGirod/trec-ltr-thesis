@@ -43,7 +43,7 @@ def getDevQrels() -> List:
     with open(Config.DEV1_QRELS_TSV, 'r') as tsv:
         tsvReader = csv.reader(tsv, delimiter='\t')
         for line in tsvReader:
-            qrels.append(Judgment(line[0],line[1],line[2],line[3]))
+            qrels.append(Judgment(line[0],'',line[1],line[2],line[3]))
     
     return qrels
 
@@ -55,7 +55,7 @@ def getTrainQrels() -> List:
     with open(Config.TRAIN_QRELS_TSV, 'r') as tsv:
         tsvReader = csv.reader(tsv, delimiter='\t')
         for line in tsvReader:
-            qrels.append(Judgment(line[0],line[1],line[2],line[3]))
+            qrels.append(Judgment(line[0],'',line[1],line[2],line[3]))
     
     return qrels
 

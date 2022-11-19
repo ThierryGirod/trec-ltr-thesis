@@ -19,9 +19,9 @@ def preprocess():
     # Preprocess the judgments
     for judgment in judgments:
         # Get query text
-        judgment.query = queries[judgment.query]
+        judgment.queryText = queries[judgment.query]
         # Remove punctuations
-        judgment.query = re.sub('[^\w\s]', '', judgment.query)
+        judgment.queryText = re.sub('[^\w\s]', '', judgment.query)
         
     # Split judgments in batches
     batchSize = 1000
@@ -41,7 +41,7 @@ def preprocess():
         for judg1, judg2 in permutations(batch,2):
             if judg1.query != judg2.query:
                 # Add document judg2 as irrelevant to query from judg1
-                negativeBatch.append(Judgment(judg1.query, judg1.iteration, judg2.docId, 0))
+                negativeBatch.append(Judgment(judg1.query, judg1.queryText, judg1.iteration, judg2.docId, 0))
         batch.extend(negativeBatch)
         
         CorpusApi.saveListAsJson(f'{Config.DATA_DIRECTORY}/train/judgments/batch_{i}.json', [asdict(judgment) for judgment in batch])
