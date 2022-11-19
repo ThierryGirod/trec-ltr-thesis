@@ -21,7 +21,8 @@ def preprocess():
         # Get query text
         judgment.queryText = queries[judgment.query]
         # Remove punctuations
-        judgment.queryText = re.sub('[^\w\s]', '', judgment.query)
+        judgment.queryText = re.sub('[^\w\s]', '', judgment.queryText)
+        
         
     # Split judgments in batches
     batchSize = 1000
