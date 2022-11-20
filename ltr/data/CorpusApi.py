@@ -110,3 +110,12 @@ def getJudgmentsBatchFileByFile():
     files = [join(Config.JUDGMENTS_BATCHES_DIRECTORY, file) for file in listdir(Config.JUDGMENTS_BATCHES_DIRECTORY) if isfile(join(Config.JUDGMENTS_BATCHES_DIRECTORY, file))]
     for file in files[:1]:
         yield file
+        
+def saveListAsFile(path: str, list: List):
+    """
+    Saves a list of values as as file
+    """
+    with open(path, 'w') as file:
+        for item in list:
+            file.write("%s\n" % item)
+        print(f'File written: {path}')

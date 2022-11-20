@@ -1,6 +1,7 @@
 import requests
 import json
 from nltk.tokenize import word_tokenize
+from ltr.data import CorpusApi, Config
 
 LTRPS_SOLR_HOST = 'localhost'
 LTRPS_SOLR_PORT = '8983'
@@ -164,6 +165,8 @@ def featureLoggingToFile(collectionName: str, path: str):
       docs.append(judgment)
       judgmentsPerQuery[judgment['queryText']] = docs.copy()
     print('Start feature logging')
+    
+    judgmentsStringList = []
     for query, judgments in list(judgmentsPerQuery.items()):
       docIds = ' OR '.join([f"id:{j['docId']}" for j in judgments])
       queryTokens = word_tokenize(query)
@@ -229,14 +232,17 @@ def featureLoggingToFile(collectionName: str, path: str):
       response = requests.post(f'{solrUrl}{collectionName}/select', data=solrFeatureQuery).json()
       try: 
         for doc in response['response']['docs']:
-          # Parse '[features] array', ie
-          # title_bm25=0.0,overview_bm25=13.237938,vote_average=7.0'
           features = doc['[features]']
           features = features.split(',')
           features = [float(ftr.split('=')[1]) for ftr in features]
+          
 
-          print(f"id:{doc['id']} {features}")
-      except:
-        print(response)
-      
+          for judgment in judgments:
+            if judgment['docId'] == doc['id']:
+              judgmentsStringList.append(f'{judgment["relevancy"]} {judgment["query"]} {judgment["docId"]} {", ".join(map(str,features))}')
+        
+      except Exception as e:
+        print(e)
+    
+    CorpusApi.saveListAsFile(f'{Config.LOGGED_BATCHES_DIRECTORY}/{path.split("/")[-1]}',judgmentsStringList)
       
