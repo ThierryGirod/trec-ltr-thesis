@@ -227,13 +227,16 @@ def featureLoggingToFile(collectionName: str, path: str):
       }
       print('Querystring created, start querying')
       response = requests.post(f'{solrUrl}{collectionName}/select', data=solrFeatureQuery).json()
-      for doc in response['response']['docs']:
-        # Parse '[features] array', ie
-        # title_bm25=0.0,overview_bm25=13.237938,vote_average=7.0'
-        features = doc['[features]']
-        features = features.split(',')
-        features = [float(ftr.split('=')[1]) for ftr in features]
+      try: 
+        for doc in response['response']['docs']:
+          # Parse '[features] array', ie
+          # title_bm25=0.0,overview_bm25=13.237938,vote_average=7.0'
+          features = doc['[features]']
+          features = features.split(',')
+          features = [float(ftr.split('=')[1]) for ftr in features]
 
-        print(f"id:{doc['id']} {features}")
+          print(f"id:{doc['id']} {features}")
+      except:
+        print(response)
       
       
