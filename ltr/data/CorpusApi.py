@@ -99,3 +99,14 @@ def deleteFile(path: str):
         os.remove(path)
         #Printing the confirmation message of deletion
         print(f'{path} deleted successfully')
+        
+
+def getJudgmentsBatchFileByFile():
+    """
+    Returns a generator function that returns all the judgment batches files from the directory
+    """
+    files = []
+   
+    files = [join(Config.JUDGMENTS_BATCHES_DIRECTORY, file) for file in listdir(Config.JUDGMENTS_BATCHES_DIRECTORY) if isfile(join(Config.JUDGMENTS_BATCHES_DIRECTORY, file))]
+    for file in files[:1]:
+        yield file

@@ -1,5 +1,6 @@
 import requests
 import json
+from nltk.tokenize import word_tokenize
 
 LTRPS_SOLR_HOST = 'localhost'
 LTRPS_SOLR_PORT = '8983'
@@ -147,4 +148,82 @@ def removeStopWords(collectionName: str, stopWords: list, lang: str):
     response = requests.delete(f'{solrStopWordsApi}/{word}').json()
     print(response)
     print(f'Deleted {word}')
-  
+
+
+def featureLoggingToFile(collectionName: str, path: str):
+    solrQueryApi = f'{solrUrl}{collectionName}/select'
+    data = []
+    with open(path, 'r') as jsonFile:
+      
+      data = json.load(jsonFile)
+      print(f'{path} loaded')  
+    
+    judgmentsPerQuery = {}
+    for judgment in data:
+      docs = judgmentsPerQuery.get(judgment['queryText'], [])
+      docs.append(judgment)
+      judgmentsPerQuery[judgment['queryText']] = docs.copy()
+    
+    for query, judgments in list(judgmentsPerQuery.items())[:1]:
+      docIds = ' OR '.join([f"id:{j['docId']}" for j in judgments])
+      queryTokens = word_tokenize(query)
+      tcqtValues = ', '.join([f"if(termfreq(title,'{t}'),1,0)" for t in queryTokens])
+      hcqtValues = ', '.join([f"if(termfreq(headings,'{t}'),1,0)" for t in queryTokens])
+      bcqtValues = ', '.join([f"if(termfreq(body,'{t}'),1,0)" for t in queryTokens])
+      dcqtValues = ', '.join([f"if(termfreq(_text_,'{t}'),1,0)" for t in queryTokens])
+      ttfValues = ', '.join([f"tf(title,'{t}')" for t in queryTokens])
+      htfValues = ', '.join([f"tf(headings,'{t}')" for t in queryTokens])
+      btfValues = ', '.join([f"tf(body,'{t}')" for t in queryTokens])
+      dtfValues = ', '.join([f"tf(_text_,'{t}')" for t in queryTokens])
+      tidfValues = ', '.join([f"idf(title,'{t}')" for t in queryTokens])
+      hidfValues = ', '.join([f"idf(headings,'{t}')" for t in queryTokens])
+      bidfValues = ', '.join([f"idf(body,'{t}')" for t in queryTokens])
+      didfValues = ', '.join([f"idf(_text_,'{t}')" for t in queryTokens])
+      ttfidfValues = ', '.join([f"product(tf(title,'{t}'),idf(title,'{t}'))" for t in queryTokens])
+      htfidfValues = ', '.join([f"product(tf(headings,'{t}'),idf(headings,'{t}'))" for t in queryTokens])
+      btfidfValues = ', '.join([f"product(tf(body,'{t}'),idf(body,'{t}'))" for t in queryTokens])
+      dtfidfValues = ', '.join([f"product(tf(_text_,'{t}'),idf(_text_,'{t}'))" for t in queryTokens])
+      solrFeatureQuery = {
+          "fl": f"""id,title,[features 
+                  store=thesis-ltr 
+                  efi.keywords=\"{query}\" 
+                  efi.tcqt_values=\"  {tcqtValues}
+                  \" 
+                  efi.hcqt_values=\"  {hcqtValues}
+                  \"
+                  efi.bcqt_values=\"  {bcqtValues}
+                  \"
+                  efi.dcqt_values=\"  {dcqtValues}
+                  \"
+                  efi.query_terms_length={len(queryTokens)}
+                  efi.ttf_values=\"  {ttfValues}
+                  \" 
+                  efi.htf_values=\"  {htfValues}
+                  \" 
+                  efi.btf_values=\"  {btfValues}
+                  \" 
+                  efi.dtf_values=\"  {dtfValues}
+                  \" 
+                  efi.tidf_values=\"  {tidfValues}
+                  \" 
+                  efi.hidf_values=\"  {hidfValues}
+                  \" 
+                  efi.bidf_values=\"  {bidfValues}
+                  \" 
+                  efi.didf_values=\"  {didfValues}
+                  \" 
+                  efi.ttfidf_values=\"  {ttfidfValues}
+                  \" 
+                  efi.htfidf_values=\"  {htfidfValues}
+                  \" 
+                  efi.btfidf_values=\"  {btfidfValues}
+                  \" 
+                  efi.dtfidf_values=\"  {dtfidfValues}
+                  \" 
+          ]""",
+          'q': f"{docIds}",
+          'rows': 10,
+          'wt': 'json'  
+      }
+      print(f'{tcqtValues}{hcqtValues}{bcqtValues}{dcqtValues}')
+      
