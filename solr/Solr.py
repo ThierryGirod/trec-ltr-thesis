@@ -163,8 +163,8 @@ def featureLoggingToFile(collectionName: str, path: str):
       docs = judgmentsPerQuery.get(judgment['queryText'], [])
       docs.append(judgment)
       judgmentsPerQuery[judgment['queryText']] = docs.copy()
-    
-    for query, judgments in list(judgmentsPerQuery.items())[:1]:
+    print('Start feature logging')
+    for query, judgments in list(judgmentsPerQuery.items()):
       docIds = ' OR '.join([f"id:{j['docId']}" for j in judgments])
       queryTokens = word_tokenize(query)
       tcqtValues = ', '.join([f"if(termfreq(title,'{t}'),1,0)" for t in queryTokens])
@@ -225,5 +225,15 @@ def featureLoggingToFile(collectionName: str, path: str):
           'rows': 10,
           'wt': 'json'  
       }
-      print(f'{tcqtValues}{hcqtValues}{bcqtValues}{dcqtValues}')
+      print('Querystring created, start querying')
+      response = requests.post(f'{solrUrl}{collectionName}/select', data=solrFeatureQuery).json()
+      for doc in response['response']['docs']:
+        # Parse '[features] array', ie
+        # title_bm25=0.0,overview_bm25=13.237938,vote_average=7.0'
+        features = doc['[features]']
+        features = features.split(',')
+        features = [float(ftr.split('=')[1]) for ftr in features]
+
+        print(f"id:{doc['id']} {features}")
+      
       
