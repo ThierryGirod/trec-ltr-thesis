@@ -38,11 +38,18 @@ def preprocess():
     # 3. Extend the current positive batch with all the negative samples
     # 4. Save batch        
     for i, batch in enumerate(batches):
+        batch2 = batch.copy()
         negativeBatch = []
-        for judg1, judg2 in permutations(batch,2):
-            if judg1.query != judg2.query:
-                # Add document judg2 as irrelevant to query from judg1
-                negativeBatch.append(Judgment(judg1.query, judg1.queryText, judg1.iteration, judg2.docId, 0))
+        
+        for judg1 in batch:
+            for judg2 in batch2:
+                if judg1.query != judg2.query:
+                    negativeBatch.append(Judgment(judg1.query, judg1.queryText, judg1.iteration, judg2.docId, 0))
+                    batch2.remove(judg2)
+                    break
+                else:
+                    continue
+
         batch.extend(negativeBatch)
         
         CorpusApi.saveListAsJson(f'{Config.DATA_DIRECTORY}/train/judgments/batch_{i}.json', [asdict(judgment) for judgment in batch])
