@@ -228,7 +228,7 @@ def featureLoggingToFile(collectionName: str, path: str):
           'rows': 10,
           'wt': 'json'  
       }
-      print('Querystring created, start querying')
+      
       response = requests.post(f'{solrUrl}{collectionName}/select', data=solrFeatureQuery).json()
       try: 
         for doc in response['response']['docs']:
