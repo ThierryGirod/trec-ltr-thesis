@@ -108,7 +108,7 @@ def getJudgmentsBatchFileByFile():
     files = []
    
     files = [join(Config.JUDGMENTS_BATCHES_DIRECTORY, file) for file in listdir(Config.JUDGMENTS_BATCHES_DIRECTORY) if isfile(join(Config.JUDGMENTS_BATCHES_DIRECTORY, file))]
-    for file in files[:1]:
+    for file in files:
         yield file
         
 def saveListAsFile(path: str, list: List):
