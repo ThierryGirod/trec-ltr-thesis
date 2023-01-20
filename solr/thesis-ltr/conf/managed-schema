@@ -1016,7 +1016,9 @@
        For more info: http://lucene.apache.org/solr/guide/other-schema-elements.html#OtherSchemaElements-Similarity
     -->
     
-     <similarity class="solr.ClassicSimilarityFactory">
+     <similarity class="solr.BM25Similarity">
+        <float name="k1">1.2</float>
+        <float name="b">0.75</float>
      </similarity>
    
 
