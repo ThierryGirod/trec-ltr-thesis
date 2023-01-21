@@ -73,6 +73,17 @@
        with their external dependencies.
     -->
     <lib dir="${solr.install.dir:../../../..}/dist/" regex="solr-ltr-\d.*\.jar" />
+    <queryParser name="ltr" class="org.apache.solr.ltr.search.LTRQParserPlugin"/>
+    <cache name="QUERY_DOC_FV"
+       class="solr.search.LRUCache"
+       size="4096"
+       initialSize="2048"
+       autowarmCount="4096"
+       regenerator="solr.search.NoOpRegenerator" />
+
+      <transformer name="features" class="org.apache.solr.ltr.response.transform.LTRFeatureLoggerTransformerFactory">
+        <str name="fvCacheName">QUERY_DOC_FV</str>
+      </transformer>
 
   <!-- an exact 'path' can be used instead of a 'dir' to specify a
        specific jar file.  This will cause a serious error to be logged
@@ -465,23 +476,6 @@
                         autowarmCount="128"
                         showItems="32" />
       -->
-    
-    <!-- Feature Values Cache
-
-         Cache used by the Learning To Rank (LTR) contrib module.
-
-         You will need to set the solr.ltr.enabled system property
-         when running solr to run with ltr enabled:
-           -Dsolr.ltr.enabled=true
-
-         https://lucene.apache.org/solr/guide/learning-to-rank.html
-      -->
-    <cache enable="${solr.ltr.enabled:false}" name="QUERY_DOC_FV"
-           class="solr.search.LRUCache"
-           size="4096"
-           initialSize="2048"
-           autowarmCount="4096"
-           regenerator="solr.search.NoOpRegenerator" />
 
     <!-- Custom Cache
 
@@ -501,7 +495,7 @@
               regenerator="com.mycompany.MyRegenerator"
               />
       -->
-   
+
 
     <!-- Lazy Field Loading
 
@@ -1203,7 +1197,6 @@
      <queryParser name="myparser" class="com.mycompany.MyQParserPlugin"/>
     -->
 
-
   <!-- Function Parsers
 
        http://wiki.apache.org/solr/FunctionQuery
@@ -1216,17 +1209,6 @@
      <valueSourceParser name="myfunc"
                         class="com.mycompany.MyValueSourceParser" />
     -->
-    <!--  LTR query parser
-
-        You will need to set the solr.ltr.enabled system property
-        when running solr to run with ltr enabled:
-          -Dsolr.ltr.enabled=true
-
-        https://lucene.apache.org/solr/guide/learning-to-rank.html
-
-        Query parser is used to rerank top docs with a provided model
-    -->
-  <queryParser enable="${solr.ltr.enabled:false}" name="ltr" class="org.apache.solr.ltr.search.LTRQParserPlugin"/>
 
 
   <!-- Document Transformers
@@ -1252,21 +1234,4 @@
       EditorialMarkerFactory will do exactly that:
      <transformer name="qecBooster" class="org.apache.solr.response.transform.EditorialMarkerFactory" />
     -->
-     
-     <!--
-      LTR Transformer will encode the document features in the response. For each document the transformer
-      will add the features as an extra field in the response. The name of the field will be the
-      name of the transformer enclosed between brackets (in this case [features]).
-      In order to get the feature vector you will have to specify that you
-      want the field (e.g., fl="*,[features])
-
-      You will need to set the solr.ltr.enabled system property
-      when running solr to run with ltr enabled:
-        -Dsolr.ltr.enabled=true
-
-      https://lucene.apache.org/solr/guide/learning-to-rank.html
-      -->
-    <transformer enable="${solr.ltr.enabled:false}" name="features" class="org.apache.solr.ltr.response.transform.LTRFeatureLoggerTransformerFactory">
-      <str name="fvCacheName">QUERY_DOC_FV</str>
-    </transformer>
 </config>
