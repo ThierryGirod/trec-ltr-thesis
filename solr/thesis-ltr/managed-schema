@@ -1017,8 +1017,8 @@
     -->
     
      <similarity class="org.apache.solr.schema.SimilarityFactory.BM25SimilarityFactory">
-       <float name="k1">1.2</str>
-       <float name="b">0.75</str>
+       <float name="k1">1.2</float>
+       <float name="b">0.75</float>
      </similarity>
     
 
