@@ -22,7 +22,7 @@ def indexing():
     for file in CorpusApi.getCorpusFileByFile(processed = True):
         start = time.time()    
         Solr.indexFile(collectionName, file)
-        CorpusApi.deleteFile(file)
+        #CorpusApi.deleteFile(file)
         end = time.time()
         print('Time taken for indexing file:', end - start)
         

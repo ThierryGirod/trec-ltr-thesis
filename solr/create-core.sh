@@ -1,0 +1,1 @@
+/opt/solr/bin/solr create -c thesis-ltr
