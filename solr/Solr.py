@@ -157,11 +157,11 @@ def createClassicSimilarityTextType(collectionName: str, typeName: str):
     
     
     
-def createTextField(collectionName: str, fieldName: str, typeName: str):
+def createTextField(collectionName: str, fieldName: str, typeName: str, multiValued: bool = False, stored: bool = True):
     # Delete first existing field
     deleteField(collectionName, fieldName)
     
-    addField = {"add-field":{ "name":fieldName, "type": typeName, "stored":"true", "indexed":"true", "multiValued":"false" }}
+    addField = {"add-field":{ "name":fieldName, "type": typeName, "stored": stored, "indexed":"true", "multiValued": multiValued }}
     response = requests.post(f"{solrUrl}{collectionName}/schema", json=addField).json()
     print(f'Added {fieldName}')
 
