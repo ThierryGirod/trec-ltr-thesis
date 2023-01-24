@@ -101,7 +101,55 @@ def createTextType(collectionName: str, typeName: str):
               "class":"solr.ManagedSynonymGraphFilterFactory",
               "managed":"english"},
             {
-              "class":"solr.LowerCaseFilterFactory"}]}},
+              "class":"solr.LowerCaseFilterFactory"
+            }]
+        },
+        "similarity": {
+          "class": "org.apache.solr.search.similarities.BM25SimilarityFactory"
+        }
+        
+        },
+                   
+      
+    }
+    response = requests.post(f"{solrUrl}{collectionName}/schema", json=addTextType).json()
+    print(f'Added {typeName}')
+
+def createClassicSimilarityTextType(collectionName: str, typeName: str):
+    addTextType = {"add-field-type":{
+        "name":typeName,
+        "class":"solr.TextField",
+        "positionIncrementGap":"100",
+        "multiValued": "true",
+        "indexAnalyzer":{
+          "tokenizer":{
+            "class":"solr.StandardTokenizerFactory"},
+          "filters":[{
+              "class":"solr.ManagedStopFilterFactory",
+              "managed":"english",
+              },
+            {
+              "class":"solr.LowerCaseFilterFactory"}]},
+        "queryAnalyzer":{
+          "tokenizer":{
+            "class":"solr.StandardTokenizerFactory"},
+          "filters":[{
+              "class":"solr.ManagedStopFilterFactory",
+              "managed":"english",
+              },
+            {
+              "class":"solr.ManagedSynonymGraphFilterFactory",
+              "managed":"english"},
+            {
+              "class":"solr.LowerCaseFilterFactory"
+            }]
+        },
+        "similarity": {
+          "class": "solr.ClassicSimilarityFactory"
+        }
+        
+        },
+                   
       
     }
     response = requests.post(f"{solrUrl}{collectionName}/schema", json=addTextType).json()
