@@ -205,7 +205,7 @@ featureSet = [
       "store": "thesis-ltr",
       "class" : "org.apache.solr.ltr.feature.SolrFeature",
       "params" : {
-        "q" : "_text_:(${keywords})"
+        "q" : "_copy_all_:(${keywords})"
       }
     },
 ]
