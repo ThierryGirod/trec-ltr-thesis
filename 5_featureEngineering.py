@@ -12,7 +12,7 @@ def featureLogging():
         start = time.time()
         print(f'Loading batch {batch}')    
         Solr.featureLoggingToFile(collectionName, batch)
-        #CorpusApi.deleteFile(batch)
+        CorpusApi.deleteFile(batch)
         end = time.time()
         print('Time taken for feature logging:', end - start)
 
