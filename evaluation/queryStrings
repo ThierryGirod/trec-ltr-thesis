@@ -7,3 +7,13 @@ bm25_copy_all_500 = {
                 "q": query
             }
         }
+
+bm25_title_headings_body_copy_all_500 = {
+            "fields": "id, score",
+            "limit": 500,
+            "params": {
+                "qf": "title, headings, body, _copy_all_",
+                "defType": "dismax",
+                "q": query
+            }
+        }
