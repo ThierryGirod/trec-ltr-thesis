@@ -1,0 +1,9 @@
+bm25_copy_all_500 = {
+            "fields": "id, score",
+            "limit": 500,
+            "params": {
+                "qf": "_copy_all_",
+                "defType": "dismax",
+                "q": query
+            }
+        }
