@@ -1,0 +1,275 @@
+{
+    "store": "thesis-ltr",
+    "class": "org.apache.solr.ltr.model.LinearModel",
+    "name": "ranksvm-0.01-squared_hinge",
+    "features": [
+        {
+            "name": "title_coveredQueryTerms",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "22.0"
+                }
+            }
+        },
+        {
+            "name": "headings_coveredQueryTerms",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "31.0"
+                }
+            }
+        },
+        {
+            "name": "body_coveredQueryTerms",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "34.0"
+                }
+            }
+        },
+        {
+            "name": "document_coveredQueryTerms",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "34.0"
+                }
+            }
+        },
+        {
+            "name": "title_coveredQueryTermsRatio",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "1.0"
+                }
+            }
+        },
+        {
+            "name": "headings_coveredQueryTermsRatio",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "1.0"
+                }
+            }
+        },
+        {
+            "name": "body_coveredQueryTermsRatio",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "1.0"
+                }
+            }
+        },
+        {
+            "name": "document_coveredQueryTermsRatio",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "1.0"
+                }
+            }
+        },
+        {
+            "name": "title_tf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "25.217281"
+                }
+            }
+        },
+        {
+            "name": "headings_tf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "71.3568"
+                }
+            }
+        },
+        {
+            "name": "body_tf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "529.04224"
+                }
+            }
+        },
+        {
+            "name": "document_tf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "530.54956"
+                }
+            }
+        },
+        {
+            "name": "title_idf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "8.369181",
+                    "max": "238.08615"
+                }
+            }
+        },
+        {
+            "name": "headings_idf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "6.34288",
+                    "max": "189.11295"
+                }
+            }
+        },
+        {
+            "name": "body_idf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "2.5495176",
+                    "max": "123.85025"
+                }
+            }
+        },
+        {
+            "name": "document_idf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "2.5495176",
+                    "max": "123.85024"
+                }
+            }
+        },
+        {
+            "name": "title_tfidf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "176.37538"
+                }
+            }
+        },
+        {
+            "name": "headings_tfidf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "354.528"
+                }
+            }
+        },
+        {
+            "name": "body_tfidf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "2197.0798"
+                }
+            }
+        },
+        {
+            "name": "document_tfidf",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "2197.0798"
+                }
+            }
+        },
+        {
+            "name": "title_bm25",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "38.983177"
+                }
+            }
+        },
+        {
+            "name": "headings_bm25",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "68.29706"
+                }
+            }
+        },
+        {
+            "name": "body_bm25",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "57.78668"
+                }
+            }
+        },
+        {
+            "name": "document_bm25",
+            "norm": {
+                "class": "org.apache.solr.ltr.norm.MinMaxNormalizer",
+                "params": {
+                    "min": "0.0",
+                    "max": "63.318443"
+                }
+            }
+        }
+    ],
+    "params": {
+        "weights": {
+            "title_coveredQueryTerms": -0.35381072982950196,
+            "headings_coveredQueryTerms": -0.39232641147093994,
+            "body_coveredQueryTerms": -0.8810376209742762,
+            "document_coveredQueryTerms": -0.8810376209742762,
+            "title_coveredQueryTermsRatio": 0.16732780059284713,
+            "headings_coveredQueryTermsRatio": 0.06845907385420444,
+            "body_coveredQueryTermsRatio": 0.18349463706831184,
+            "document_coveredQueryTermsRatio": 0.18349463706831184,
+            "title_tf": -0.2855525043203612,
+            "headings_tf": -0.35499367183952846,
+            "body_tf": -0.12052983429096055,
+            "document_tf": -0.14476339392102863,
+            "title_idf": 0.0,
+            "headings_idf": 0.0,
+            "body_idf": 0.0,
+            "document_idf": 0.0,
+            "title_tfidf": 0.2665349506398229,
+            "headings_tfidf": 0.14882098381771452,
+            "body_tfidf": 0.5324113477037115,
+            "document_tfidf": 0.5241895579685073,
+            "title_bm25": 1.4729921217824515,
+            "headings_bm25": 0.9881347542097026,
+            "body_bm25": 4.2783752899286505,
+            "document_bm25": 3.9041468458964173
+        }
+    }
+}
