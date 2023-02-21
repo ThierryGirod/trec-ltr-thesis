@@ -1,0 +1,125 @@
+{
+  "initArgs":{},
+  "initializedOn":"2023-01-26T07:16:36.824Z",
+  "updatedSinceInit":"2023-01-26T10:49:23.789Z",
+  "managedList":[
+    {
+      "name":"title_coveredQueryTerms",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${tcqt_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"headings_coveredQueryTerms",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${hcqt_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"body_coveredQueryTerms",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${bcqt_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"document_coveredQueryTerms",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${dcqt_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"title_coveredQueryTermsRatio",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} div(sum(${tcqt_values}),${query_terms_length})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"headings_coveredQueryTermsRatio",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} div(sum(${hcqt_values}),${query_terms_length})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"body_coveredQueryTermsRatio",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} div(sum(${bcqt_values}),${query_terms_length})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"document_coveredQueryTermsRatio",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} div(sum(${dcqt_values}),${query_terms_length})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"title_tf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${ttf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"headings_tf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${htf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"body_tf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${btf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"document_tf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${dtf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"title_idf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${tidf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"headings_idf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${hidf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"body_idf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${bidf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"document_idf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${didf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"title_tfidf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${ttfidf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"headings_tfidf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${htfidf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"body_tfidf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${btfidf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"document_tfidf",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"{!func} sum(${dtfidf_values})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"title_bm25",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"title:(${keywords})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"headings_bm25",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"headings:(${keywords})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"body_bm25",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"body:(${keywords})"},
+      "store":"thesis-ltr"},
+    {
+      "name":"document_bm25",
+      "class":"org.apache.solr.ltr.feature.SolrFeature",
+      "params":{"q":"_copy_all_:(${keywords})"},
+      "store":"thesis-ltr"}]}
