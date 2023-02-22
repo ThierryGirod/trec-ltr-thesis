@@ -75,7 +75,7 @@ def enableLtr(collectionName: str):
     response = requests.post(collectionConfigUrl, json=addLtrTransformer).json()
     print("Status: Success" if response["responseHeader"]["status"] == 0 else "Status: Failure; Response:[ " + str(response) + " ]" )
     
-def createTextType(collectionName: str, typeName: str):
+def createTextType(collectionName: str, typeName: str, bm25K1: float = 1.2, bm25B: float = 0.75):
     addTextType = {"add-field-type":{
         "name":typeName,
         "class":"solr.TextField",
@@ -105,7 +105,9 @@ def createTextType(collectionName: str, typeName: str):
             }]
         },
         "similarity": {
-          "class": "org.apache.solr.search.similarities.BM25SimilarityFactory"
+          "class": "org.apache.solr.search.similarities.BM25SimilarityFactory",
+          "k1": bm25K1,
+          "b": bm25B
         }
         
         },
