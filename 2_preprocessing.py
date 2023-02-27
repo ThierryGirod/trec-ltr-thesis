@@ -57,7 +57,7 @@ def preprocess():
                 print(f'{fileName}:{i+1}/{len(documents)} processed')
             
             CorpusApi.saveListAsJson(f'{Config.CORPUS_ROOT_DIRECTORY}/processed/{fileName}_processed.json', documents)
-            #CorpusApi.deleteFile(file)
+            CorpusApi.deleteFile(file)
             print(f'End processing {fileName}')
         
 
