@@ -3,12 +3,14 @@ from solr import Solr
 import requests
 import json
 import re
-    
+
+# Delete the existing feature store    
 collectionName = 'thesis-ltr'
 response = requests.delete(f'{Solr.solrUrl}{collectionName}/schema/feature-store/{collectionName}')
 
 print(response)
 
+# Create the features json with solr functions from https://solr.apache.org/guide/8_5/function-queries.html
 featureSet = [
     # Covered query terms
     {
@@ -210,6 +212,7 @@ featureSet = [
     },
 ]
 
+# Add the new feature store to solr
 response = requests.put(f'{Solr.solrUrl}{collectionName}/schema/feature-store',
                     json=featureSet).json()
 
