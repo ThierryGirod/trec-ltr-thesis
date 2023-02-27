@@ -4,8 +4,10 @@ import json
 import requests
 import time
 
+ # First setup a core in solr with the create-core.sh script in ./solr directory
 def indexing():
-    try: 
+    try:     
+        # 1. Setup the schema for solr
         collectionName = 'thesis-ltr'
         typeName = 'custom_text_general_bm25_similarity'
         classicTypeName = 'custom_text_general_classic_similarity'
@@ -33,11 +35,11 @@ def indexing():
         Solr.addCopyField(collectionName, 'headings', 'headings_classic')
         Solr.addCopyField(collectionName, 'body', 'body_classic')
         
-
+        # 2. Index the preprocessed data in solr
         for file in CorpusApi.getCorpusFileByFile(processed = True):
             start = time.time()    
             Solr.indexFile(collectionName, file)
-            #CorpusApi.deleteFile(file)
+            CorpusApi.deleteFile(file)
             end = time.time()
             print('Time taken for indexing file:', end - start)
     except Exception as e:
