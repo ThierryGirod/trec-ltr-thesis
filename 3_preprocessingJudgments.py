@@ -30,17 +30,14 @@ def preprocess():
     for batch in split(judgments, batchSize):
         batches.append(batch)
     
-    #  Add negative queries for each query and save them
-    # 1. Get permutations of all judgment pairs
-    # 2. When the first judgment does not have the same query as the second one 
-    #    create a new judgment that marks the document from judgment 2 as 
-    #    irrelevant for query from judgment 1
-    # 3. Extend the current positive batch with all the negative samples
-    # 4. Save batch        
+    #  Add negative queries for each query and save them   
     for i, batch in enumerate(batches):
         batch2 = batch.copy()
         negativeBatch = []
-        
+        # 1. Get permutations of all judgment pairs
+        # 2. When the first judgment does not have the same query as the second one 
+        #    create a new judgment that marks the document from judgment 2 as 
+        #    irrelevant for query from judgment 1
         for judg1 in batch:
             for judg2 in batch2:
                 if judg1.query != judg2.query:
@@ -49,9 +46,10 @@ def preprocess():
                     break
                 else:
                     continue
-
+         # 3. Extend the current positive batch with all the negative samples    
         batch.extend(negativeBatch)
         
+        # 4. Save batch 
         CorpusApi.saveListAsJson(f'{Config.DATA_DIRECTORY}/train/judgments/batch_{i}.json', [asdict(judgment) for judgment in batch])
         
         print(f'Batch #{i} processed')
