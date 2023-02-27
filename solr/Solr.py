@@ -3,6 +3,10 @@ import json
 from nltk.tokenize import word_tokenize
 from ltr.data import CorpusApi, Config
 
+
+# Solr helper functions inspired by 
+# https://github.com/treygrainger/ai-powered-search/blob/master/docker/data-science/notebooks/aips.py
+
 LTRPS_SOLR_HOST = 'localhost'
 LTRPS_SOLR_PORT = '8983'
 
