@@ -4,10 +4,12 @@ from ltr.data import CorpusApi
 import time
 
 
+
 def featureLogging():
     
     collectionName = 'thesis-ltr'
     
+    # Log the features per Batch and save the features to the filesystem
     for batch in CorpusApi.getJudgmentsBatchFileByFile():
         start = time.time()
         print(f'Loading batch {batch}')    
